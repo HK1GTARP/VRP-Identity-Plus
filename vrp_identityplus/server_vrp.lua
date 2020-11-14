@@ -11,19 +11,12 @@ function IdentityPlus:__construct()
 	self.luang:loadLocale(vRP.cfg.lang, module("vrp_identityplus", "cfg/lang/"..vRP.cfg.lang))
 	self.lang = self.luang.lang[vRP.cfg.lang]
 
-	-- local function m_update_id(menu, value, mod, index)
-	-- 	local user = menu.user
-	-- 	local id = user.id
-	-- 	local tuser = vRP.users[id]
-
-	-- 	menu:updateOption(index, nil, self.lang.identityplus.description({
-	-- 		tuser and tuser.source or "offline", -- source
-	-- 	}))
-	-- end
-
 	vRP.EXT.GUI:registerMenuBuilder("identity", function(menu)
-		menu:addOption(self.lang.identityplus.title(), nil --[[m_update_id]], self.lang.identityplus.description({vRP.users[menu.user.id].source, menu.user.id, menu.user.cid}))
+		menu:addOption(self.lang.identityplus.ids.title(), nil --[[m_update_id]], self.lang.identityplus.ids.description({vRP.users[menu.user.id].source, menu.user.id, menu.user.cid}))
+		menu:addOption(self.lang.identityplus.cash.title(), nil, self.lang.identityplus.cash.description({menu.user:getWallet()}))
 	end)
+
+	
 end
 
 vRP:registerExtension(IdentityPlus)
